@@ -2,7 +2,7 @@ const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-
+require("dotenv").config();
 
 exports.resetPasswordToken = async (req, res) => {
 	try {
@@ -25,7 +25,7 @@ exports.resetPasswordToken = async (req, res) => {
 			{ new: true }
 		);
 		console.log("DETAILS", updatedDetails);
-		const url = `https://brainopclient.vercel.app/update-password/${token}`;
+		const url = `${process.env.REACT_APP_BASE_URL}/update-password/${token}`;
 
 		await mailSender(
 			email,
